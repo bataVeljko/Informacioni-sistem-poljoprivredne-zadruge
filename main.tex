@@ -153,10 +153,11 @@ Detaljnom analizom načina funkcionisanja zadruga kako u poljoprivredi tako i u 
             \item[6.b] Ukoliko je korisnik odabrao lozinku koja ne odgovara specifikacijama sistema (prekratka, nema nijedan broj, nema nijedno veliko slovo), prikazuje se odgovarajuća poruka. Slučaj upotrebe se nastavlja od koraka 2.
             \item[6.c] Ukoliko korisnik nije popunio sva polja forme, prikazuje se odgovarajuća poruka. Slučaj upotrebe se nastavlja od koraka 2.
             \item[6.d] Ukoliko korisnik nije izabrao ulogu koju želi da ima u sistemu, prikazuje se odgovarajuća poruka. Slučaj upotrebe se nastavlja od koraka 3.
-            \item[6.e] Ukoliko korisnik nije popunio odgovarajuća polja vezana za kooperanta, prikazuje se odgovarajuća poruka. Slučaj upotrebe se na stavlja od koraka 4.
+            \item[6.e] Ukoliko korisnik nije popunio odgovarajuća polja vezana za kooperanta, prikazuje se odgovarajuća poruka. Slučaj upotrebe se nastavlja od koraka 4.
+            \item[6.f] Ukoliko korisnik nije popunio odgovarajuća polja vezana za karticu, prikazuje se odgovarajuća poruka. Slučaj upotrebe se nastavlja od koraka 4.
         }
         
-        \addfield{Dodatne informacije:}{Forma za prijavu sadrži sledeća polja: korisničko ime, lozinku, email adresu, broj telefona, izbor uloge u okviru sistema (kupac/kooperant). Dodatna polja koja popunjava korisnik koji je izabrao ulogu kooperanta su: predmet proizvodnje, mesto proizvodnje, količina proizvoda, cena porizvoda.
+        \addfield{Dodatne informacije:}{Forma za prijavu sadrži sledeća polja: korisničko ime, lozinku, email adresu, broj telefona, izbor uloge u okviru sistema (kupac/kooperant) i podatke sa kartice (kreditna/debitna). Dodatna polja koja popunjava korisnik koji je izabrao ulogu kooperanta su: predmet proizvodnje, mesto proizvodnje, količina proizvoda, cena porizvoda.
         }
 \end{usecase}
 
@@ -390,10 +391,137 @@ Neke beleske sa dogovora (dodaću sutra neke od ovih slučajeva):
 \subsubsection{Naručivanje proizvoda uživo u zadruzi}
 \subsubsection{Dostavljanje potvrde o plaćanju}
 \subsubsection{Organizacija dostave proizvoda}
-
 \subsection{Ostalo}
-\subsubsection{Davanje priloga (novčani i/ili materijalni)}
+\subsubsection{Davanje novčanog priloga}
+\begin{usecase}
+        \addtitle{SLUČAJ UPOTREBE}{}
+        \addfield{Naziv:}{Davanje priloga}
+        \addfield{Kratak opis:}{Registrovani korisnik želi da donira novac zadruzi}
+        \addfield{Učesnici:}{
+            Registrovani korisnik (član zadruge/kooperant/kupac)
+        }
+        \addfield{Preduslovi:}{
+           Korisnik je registrovan u sistemu
+        }
+        \addfield{Postuslovi:}{
+           Korisnik je izvršio novčanu donaciju ukoliko je sistem adekvatno obradio podatke
+        }
+
+        \addscenario{Glavni tok:}{
+            \item Korisnik odlazi na vebsajt i prijavljuje se
+            \item Korisnik prelazi na formu za doniranje novca
+            \item Korisnik unosi količinu novca i svrhu donacije
+            \item Korisnik potvrđuje unesene podatke 
+            \item Korisnik šalje zahtev sistemu
+            \item Sistem obrađuje zahtev
+            \item Sistem ažurira stanje na računu
+            \item Korisnik dobija potvrdu o uplati
+        }         
+        \addscenario{Alternativni tokovi:}{
+            \item[4.a]  Ukoliko korisnik nije uneo količinu novca, svrhu ili je uneo pogrešan format, prikazuje se odgovarajuča poruka. Slučaj upotrebe se nastavlja od koraka 2.
+            \item[6.a] Ukoliko uplata nije prošla, korisnik dobija opciju da se vrati na korak 2, inače slučaj upotrebe se završava.
+        }
+\end{usecase}
 \subsubsection{Plaćanje mesečne članarine}
+\begin{usecase}
+        \addtitle{SLUČAJ UPOTREBE}{}
+        \addfield{Naziv:}{Plaćanje mesečne članarine}
+        \addfield{Kratak opis:}{Član zadruge želi da uplati mesečnu članarinu}
+        \addfield{Učesnici:}{
+            Član zadruge
+        }
+        \addfield{Preduslovi:}{
+           Član zadruge je registrovan u sistemu
+        }
+        \addfield{Postuslovi:}{
+           Član zadruge je platio članarinu ukoliko je sistem adekvatno obradio podatke
+        }
+
+        %Main Success Scenario: A typical, unconditional happy path scenario of success.
+        \addscenario{Glavni tok:}{
+            \item Korisnik odlazi na vebsajt i prijavljuje se
+            \item Korisnik prelazi na formu za uplatu članarine
+            \item Korisnik unosi vrednost članarine
+            \item Korisnik potvrđuje unesene podatke
+            \item Korisnik šalje zahtev sistemu
+            \item Sistem obrađuje zahtev
+            \item Sistem ažurira korisnikova zaduženja
+            \item Korisnik dobija potvrdu o uplati
+        }
+        \addscenario{Alternativni tokovi:}{
+            \item[4.a] Ukoliko korisnik nije uneo količinu novca, svrhu ili je uneo pogrešan format, prikazuje se odgovarajuča poruka. Slučaj upotrebe se nastavlja od koraka 2.
+            \item[6.a] Ukoliko uplata nije prošla, korisnik dobija opciju da se vrati na korak 2, inače slučaj upotrebe se završava.
+        }
+\end{usecase}
+
+\subsubsection{Izdvajanje sredstava za dodatne troškove}
+\begin{usecase}
+        \addtitle{SLUČAJ UPOTREBE}{}
+        \addfield{Naziv:}{Izdvajanje sredstava za dodatne troškove}
+        \addfield{Kratak opis:}{Direktor zahteva novac od blagajnika za pokrivanje dodatnih troškova i obaveštava članove zadruge}
+        \addfield{Učesnici:}{
+            Direktor,
+            blagajnik,
+            član zadruge
+        }
+        \addfield{Preduslovi:}{
+           Stanje na računu zadruge je pozitivno
+        }
+        \addfield{Postuslovi:}{
+           Stanje na računu zadruge je pozitivno
+        }
+
+        %Main Success Scenario: A typical, unconditional happy path scenario of success.
+        \addscenario{Glavni tok:}{
+            \item Direktor zadruge odlazi na vebsajt i prijavljuje se
+            \item Direktor prelazi na formu za stvaranje dodatnog troška
+            \item Direktor unosi razlog i potrebnu količinu novca za pokrivanje troškova
+            \item Direktor potvrđuje unesene podatke
+            \item Direktor šalje zahtev blagajniku
+            \item Blagajnik proverava zahtev direktora
+            \item Blagajnik obaveštava direktora o statusu zahteva
+            \item Blagajnik odvaja novac za dodatni trošak
+            \item Blagajnik obaveštava direktora da je novac izdvojen
+            \item Direktor obaveštava članove zadruge o dodatnim troškovima
+        }
+        \addscenario{Alternativni tokovi:}{
+            \item[4.a] Ukoliko direktor nije uneo razlog za pokrivanje troškova, prikazuje se odgovarajuća poruka. Slučaj upotrebe se nastavlja od koraka 2.
+            \item[4.b] Ukoliko direktor nije uneo potrebnu količinu novca za pokrivanje troškova, prikazuje se odgovarajuća poruka. Slučaj upotrebe se nastavlja od koraka 2.
+            \item[7.a] Ukoliko bi stanje na računu postalo negativno nakon izdvajanja novca, blagajnik obaveštava direktora da nije moguće trenutno izdvojiti potrebnu količinu novca za pokrivanje troškova. Slučaj upotrebe se završava.
+            
+        }
+\end{usecase}
+\subsubsection{Izveštaj o potrošenim sredstvima}
+\begin{usecase}
+        \addtitle{SLUČAJ UPOTREBE}{}
+        \addfield{Naziv:}{Izveštaj o potrošenim sredstvima}
+        \addfield{Kratak opis:}{Blagajnik izveštava članove zadruge o utrošenom novcu}
+        \addfield{Učesnici:}{
+            Blagajnik, članovi zadruge
+        }
+        \addfield{Preduslovi:}{
+           Svi učesnici su registrovani
+        }
+        \addfield{Postuslovi:}{
+           Svi učesnici su obavešteni o tekučem stanju na računu zadruge i utrošenim sredstvima
+        }
+
+        %Main Success Scenario: A typical, unconditional happy path scenario of success.
+        \addscenario{Glavni tok:}{
+            \item Blagajnik zadruge odlazi na vebsaht i prijavljuje se
+            \item Blagajnik prelazi na formu za stvaranje mesečnog izveštaja
+            \item Blagajnik popunjava formu
+            \item Blagajnik potvrđuje unesene podatke
+            \item Sistem obrađuje zahtev
+            \item Sistem generiše izveštaj
+            \item Sistem obaveštava sve učesnike o tekućem stanju na računu zadruge
+        }
+        \addscenario{Alternativni tokovi:}{
+            \item[4.a] Ukoliko blagajnik nije popunio formu, prikazuje se odgovarajuća poruka. Slučaj upotrebe se nastavlja od koraka 2.
+            
+        }
+        \addfield{Dodatne informacije:}{Forma za stvaranje izveštaja sadrži sledeća polja: datum od kojeg se traže prihodi i rashodi, format dokumenta (pdf/docx/csv), korisnici kojima se šalje izveštaj (direktor/članovi zadruge)}
+\end{usecase}
 
 \section{Arhitektura sistema}
 
