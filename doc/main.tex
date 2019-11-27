@@ -15,6 +15,8 @@
 
 \begin{document}
 
+\pagenumbering{gobble}
+
 \title{Informacioni sistem poljoprivredne zadruge \small{Seminarski rad u okviru kursa\\Informacioni sistemi\\ Matematički fakultet}}
 
 \author{Gajić Zorana, zorana.gajic.zg@gmail.com, 1091/2019 \\ 
@@ -31,6 +33,8 @@
 \tableofcontents
 
 \newpage
+
+\pagenumbering{arabic}
 
 \section{Uvod}
 \subsection{Analiza sistema}
@@ -112,6 +116,13 @@ Detaljnom analizom načina funkcionisanja zadruga kako u poljoprivredi tako i u 
     \item Registruje svoj nalog
 \end{itemize}
 
+\subsubsection{Zaposlen}
+\indent Ima sledeće mogućnosti korišćenja sistema:
+\begin{itemize}
+    \item Primanje porudžbine putem telefona ili uživo
+    \item Organizacija dostavljanja porudžbina
+\end{itemize}
+
 \newpage
 
 \section{Slučajevi upotrebe}
@@ -168,7 +179,7 @@ Na slici \ref{dtp_nivo_0} je prikazan dijagram konteksta kao i akteri.
             \item[6.f] Ukoliko korisnik nije popunio odgovarajuća polja vezana za karticu, prikazuje se odgovarajuća poruka. Slučaj upotrebe se nastavlja od koraka 4.
         }
         
-        \addfield{Dodatne informacije:}{Forma za prijavu sadrži sledeća polja: korisničko ime, lozinku, email adresu, broj telefona, izbor uloge u okviru sistema (kupac/kooperant) i podatke sa kartice (kreditna/debitna). Dodatna polja koja popunjava korisnik koji je izabrao ulogu kooperanta su: predmet proizvodnje, mesto proizvodnje, količina proizvoda, cena porizvoda.
+        \addfield{Dodatne informacije:}{Forma za prijavu sadrži sledeća polja: ime, prezime, jmbg, korisničko ime, lozinku, email adresu, broj telefona, izbor uloge u okviru sistema (kupac/kooperant) i podatke sa kartice (kreditna/debitna). Dodatna polja koja popunjava korisnik koji je izabrao ulogu kooperanta su: predmet proizvodnje, mesto proizvodnje, količina proizvoda, cena porizvoda.
         }
 \end{usecase}
 
@@ -388,7 +399,6 @@ Neke beleske sa dogovora (dodaću sutra neke od ovih slučajeva):
 \end{itemize}
 
 
-
 \subsubsection{Slanje zahteva za proizvodnjom}
 \subsubsection{Potraživanje materijala i mašina}
 \subsubsection{Slanje zahteva za skladištenjem}
@@ -397,11 +407,126 @@ Neke beleske sa dogovora (dodaću sutra neke od ovih slučajeva):
 \subsubsection{Plaćanje proizvođaču}
 
 \subsection{Prodaja}
+
 \subsubsection{Naručivanje proizvoda preko interneta}
-\subsubsection{Naručivanje proizvoda preko telefona}
-\subsubsection{Naručivanje proizvoda uživo u zadruzi}
-\subsubsection{Dostavljanje potvrde o plaćanju}
-\subsubsection{Organizacija dostave proizvoda}
+\begin{usecase}
+        \addtitle{SLUČAJ UPOTREBE}{}
+        \addfield{Naziv:}{Naručivanje proizvoda preko interneta}
+        \addfield{Kratak opis:}{Registrovani korisnik želi da kupi proizvode preko sajta}
+        \addfield{Učesnici:}{
+            Registrovani korisnik
+        }
+        \addfield{Preduslovi:}{
+           Korisnik je registrovan
+        }
+        \addfield{Postuslovi:}{
+           Porudžbenica je uneta u sistem
+        }
+
+        \addscenario{Glavni tok:}{
+            \item Korisnik odlazi na vebsajt i prijavljuje se
+            \item Korisnik prelazi na sekciju proizvodi
+            \item Korisnik bira željene proizvode i količinu i dodaje ih u korpu
+            \item Korisnik proverava odabrane proizvode i njihovu količinu u svojoj korpi 
+            \item Korisnik bira željeni način dostave i način plaćanja
+            \item Sistem prikazuje korisniku ukupnu cenu izabranih proizvoda
+            \item Korisnik potvrđuje porudžbinu
+            \item Sistem obrađuje porudžbinu 
+        }
+        \addscenario{Alternativni tokovi:}{
+            \item[4.a] Korisnik želi da naruči još neki proizvod. Slučaj upotrebe se nastavlja od koraka 3.
+            \item[4.b] Korisnik je izbacio neki proizvod iz korpe. Slučaj upotrebe se nastavlja od koraka 4. 
+            \item[7.a] Korisnik je poništio porudžbinom klikom na dugme za poništavanje. Slučaj upotrebe se završava.
+        }
+        \addfield{Dodatne informacije:}{
+            Mogući načini dostave proizvoda su: 
+            \begin{itemize}
+                \item Lično preuzimanje u zadruzi (besplatno)
+                \item Dostava od strane zadruge (jeftino, u zavisnosti od cene poručene robe može biti i besplatno, ali može potrajati do 7 dana)                
+                \item Dostava po kurirskoj službi (skupo, ali zagarantovana isporuka u roku od 2 radna dana)
+            \end{itemize}
+            Mogući načini plaćanja proizvoda su: 
+            \begin{itemize}
+                \item Karticom
+                \item Prilikom preuzimanja porudžbine  
+            \end{itemize}
+        }
+\end{usecase}
+
+\subsubsection{Naručivanje proizvoda preko telefona ili uživo}
+\begin{usecase}
+        \addtitle{SLUČAJ UPOTREBE}{}
+        \addfield{Naziv:}{Naručivanje proizvoda preko telefona ili uživo}
+        \addfield{Kratak opis:}{Registrovani korisnik želi da kupi proizvode putem poziva telefonskog broja zadruge ili odlaskom na adresu zadruge}
+        \addfield{Učesnici:}{
+            Registrovani korisnik, zaposleni zadruge
+        }
+        \addfield{Preduslovi:}{
+           Korisnik je registrovan
+        }
+        \addfield{Postuslovi:}{
+           Zaposleni unosi porudžbenicu u sistem
+        }
+        \addscenario{Glavni tok:}{
+            \item Korisnik poziva ponuđeni na vebsajtu broj telefona zadruge ili odlazi na lokaciju zadruge koja je takođe ponuđena na vebsajtu    
+            \item Zaposleni zahteva lične podatke korisnika radi identifikacije
+            \item Korisnik obaveštava zaposlenog o svojim ličnim podacima 
+            \item Korisnik obaveštava zaposlenog o proizvodima koje želi da poruči
+            \item Zaposleni proverava dostupnost traženih proizvoda
+            \item Korisnik bira željeni način dostave i način plaćanja
+            \item Zaposleni obaveštava korisnika o ukupnoj ceni izabranih proizvoda
+            \item Korisnik potvrđuje porudžbinu
+            \item Zaposleni upisuje u sistem porudžbinu
+        }
+        \addscenario{Alternativni tokovi:}{
+            \item[3.a] Korisnik nije registrovan u sistem zadruge, neophodno je da napravi nalog. Slučaj upotrebe se preusmerava na slučaj 'Registrovanje korisnika'.
+            \item[7.a] Korisnik se predomislio u vezi kupovine. Slučaj upotrebe se nastavlja od koraka 4.
+            \item[8.a] Korisnik je odustao od porudžbine. Slučaj upotrebe se završava.
+        }
+        \addfield{Dodatne informacije:}{
+            Lični podaci koje zaposleni može da zahteva su:
+            \begin{itemize}
+                \item Korisničko ime, jmbg i email.
+            \end{itemize}
+        }
+\end{usecase}
+
+
+\subsubsection{Obrada i dostava porudžbine}
+\begin{usecase}
+        \addtitle{SLUČAJ UPOTREBE}{}
+        \addfield{Naziv:}{Obrada porudžbine}
+        \addfield{Kratak opis:}{Obrada porudžbine i organizacija dostave}
+        \addfield{Učesnici:}{
+            Zaposleni, član zadruge, registrovani korisnik
+        }
+        \addfield{Preduslovi:}{
+           Korisnik je naručio proizvode iz zadruge
+        }
+        \addfield{Postuslovi:}{
+           Korisnik je preuzeo poručene proizvode
+        }
+        \addscenario{Glavni tok:}{
+            \item Zaposleni objavljuje na vebsajtu obaveštenje o proizvodima i njihovoj količini koji trebaju biti dostavljeni u zadrugu
+            \item Član zadruge se javlja zaposlenom putem poziva da izvrši dostavu svih traženih proizvoda zadruzi 
+            \item Zaposleni uklanja obaveštenje sa sajta
+            
+            \item Član zadruge dostavlja proizvode u zadrugu u datom roku
+            \item Zaposleni proverava da li je dostavljeno sve što je i poručeno
+            \item Korisnik je obavešten da se proizvodi koje je poručio nalaze u zadruzi i dat mu je rok od nedelju dana da iste preuzme na adresi zadruge
+            \item Korisnik je preuzeo proizvode
+            
+        }  
+        \addscenario{Alternativni tokovi:}{
+             \item[2.a] Član zadruge je odgovorio da će dostaviti deo proizvoda u zadrugu. Obaveštenje se automatski ažurira. Slučaj upotrebe se nastavlja od koraka 1.
+             \item[6.a] Kurirska služba dostavlja proizvode na adresu kupca. Slučaj upotrebe se nastavlja od koraka 7.
+             \item[6.b] Član zadruge dostavlja proizvode na adresu kupca. Slučaj upotrebe se nastavlja od koraka 7.
+             \item[7.a] Korisnik nije primio porudžbinu u datom roku i proizvodi su vraćeni zadruzi, a zatim vlasnicima. Slučaj upotrebe se završava.
+        }
+        
+\end{usecase}
+
+
 \subsection{Ostalo}
 \subsubsection{Davanje novčanog priloga}
 \begin{usecase}
@@ -482,7 +607,6 @@ Neke beleske sa dogovora (dodaću sutra neke od ovih slučajeva):
            Stanje na računu zadruge je pozitivno
         }
 
-        %Main Success Scenario: A typical, unconditional happy path scenario of success.
         \addscenario{Glavni tok:}{
             \item Direktor zadruge odlazi na vebsajt i prijavljuje se
             \item Direktor prelazi na formu za stvaranje dodatnog troška
