@@ -376,37 +376,169 @@ Na slici \ref{dtp_nivo_0} je prikazan dijagram konteksta kao i akteri.
 \end{usecase}
 
 
-\subsection{Proizvodnja}
+\subsection{Proizvodnja i prodaja}
 
-Neke beleske sa dogovora (dodaću sutra neke od ovih slučajeva): 
-\begin{itemize}
-  \item Slanje zahteva za proizvodnjom - clan salje clanu/koooperatoru (ovo moramo jos da vidimo kako cemo nije bas najjasnije
-
-  \item Potraivanje materijala i mašina - clan potrazuje drugom clanu mašinu ili pomoć
-  
-  \item Javljanje za materijal ili masinu da das drugome  ( + alternativa za sladiste) - odgovor na potrazivanje - popunis neke forme
-  
-  \item Slanje zahteva za skladištenjem - ovo je 2 kao alternativni put da umesto masine pozajmis skladiste)
-  clan zahteva clanu da mu on skladisti u svom skladistu 
-  
-  \item Slanje ponude za prodaju
-   clan salje svima(sistemu kupcima s....) sta ima na stanju 
-
-  \item Plaćanje proizvodjacu, Slanje zahteva za preradu
-  
-  \item predlog kupovine eksternih dobara - direktor predlaze kupovinu (masina/materijala/...) za koriscenje zadruge iz budzeta - clanovi zadruge glasaju 
-  
-\end{itemize}
-
-
-\subsubsection{Slanje zahteva za proizvodnjom}
-\subsubsection{Potraživanje materijala i mašina}
-\subsubsection{Slanje zahteva za skladištenjem}
-\subsubsection{Slanje zahteva za preradu}
 \subsubsection{Slanje ponude za prodaju}
-\subsubsection{Plaćanje proizvođaču}
+\begin{usecase}
+        \addtitle{SLUČAJ UPOTREBE}{}
+        \addfield{Naziv:}{Slanje ponude za prodaju zahteva}
+        \addfield{Kratak opis:}{Korisnik šalje podatke o trenutnom stanju proizvoda koji su dostupni za prodaju}
+        \addfield{Učesnici:}{
+        Član zadruge, kooperator, zaposleni zadruge
+        }
+        \addfield{Preduslovi:}{
+        Korisnik je registrovan
+        }
+        \addfield{Postuslovi:}{
+        Proizvodi su prikazani potencijalnim kupcima kao deo ponude zadruge
+        }
 
-\subsection{Prodaja}
+        \addscenario{Glavni tok:}{
+            \item Korisnik se nalazi na sekciji proizvodi
+            \item Korisnik izabira opciju za dodavanje novih proizvoda ponudi
+            \item Korisnik popunjava formu sa opisom, cenom i kolicinom dostupnih proizvoda
+            \item Korisnik potvrđuje podatke
+            \item Sistem validira upisane podatke
+            \item Sistem obaveštava zaposlenog zadruge o ponudi
+            \item Zaposleni zadruge proverava ponudu i odobrava je
+            \item Sistem prikazuje ponudu kao deo ponude zadruge
+        }
+        \addscenario{Alternativni tokovi:}{
+            \item[5.a] Ukoliko podaci nisu validni slučaj upotrebe se nastavlja od koraka 3
+            
+            \item[7.a] Ukoliko zaposleni zadruge ne odobri ponudu, ponuda se briše, kooperator ili član zadruge se obaveštava i slučaj upotrebe se završava
+            
+        }
+\end{usecase}
+
+
+
+
+
+
+\subsubsection{Potražnja resursa}
+\begin{usecase}
+        \addtitle{SLUČAJ UPOTREBE}{}
+        \addfield{Naziv:}{Potraživanje resursa}
+        \addfield{Kratak opis:}{Član zadruge potražuje resurs od drugih članova zadruge u vidu materijala, mašina ili skladišta}
+        \addfield{Učesnici:}{
+        Članovi zadruge
+        }
+        \addfield{Preduslovi:}{
+        Korisnik je registrovan i aktivni je član zadruge
+           
+        }
+        \addfield{Postuslovi:}{
+        Korisnik je objavio potražnju za resursom
+        }
+
+        \addscenario{Glavni tok:}{
+            \item Korisnik prelazi na formu za potraživanje resursa
+            \item Korisnik izabira mašinu kao vrstu resursa za potražnju
+            \item Korisnik popunjava formu koja sadži informacije o traženoj mašini
+            \item Korisnik unosi podatke o nadoknadi koju nudi za željeni resurs
+            \item Sistem vrši validaciju podataka
+            \item Sistem formira oglas i obaveštava članove zadruge o novom oglasu
+            \item Sistem obaveštava korisnika o uspešnoj potražnji
+            
+        }
+        \addscenario{Alternativni tokovi:}{
+            \item[2.a] Ukoliko korisnik izabere skladište kao resurs za potražnju, forma za taj resurs se popunjava i slučaj upotrebe se nastavlja od koraka 4
+            
+            \item[2.b] Ukoliko korisnik izabere materijale kao resurs za potražnju, forma za taj resurs se popunjava i slučaj upotrebe se nastavlja od koraka 4
+            
+            \item[2.c] Ukoliko korisnik izabere uslugu kao resurs za potražnju, forma za taj resurs se popunjava i slučaj upotrebe se nastavlja od koraka 4
+            
+            \item[5.b] Ukoliko neki od traženih podataka nije unesen ili nije valida slučaj upotrebe se vraća na korak 2
+            
+        }
+        
+        \addfield{Dodatne informacije:}{
+        Forma koja se tiče potražnje mašina sadrži podatke o tipu i modelu mašine kao i o vremenskoj odrednici za koju se mašina potražuje
+        
+        Forma koja se tiče potražnje materijala sadrži podatke o vrsti i količini materijala za obradu
+        
+        Forma koja se tiče potražnje usluge kao što je pomoć oko obrade sadrži o vrsti i trajanju usluge
+        
+        Forma koja se tiče potražnje sladišta sadrži podatke o veličini i okvirnoj lokaciji traženog skladišta
+        }
+\end{usecase}
+
+
+
+\subsubsection{Prihvatanje zahteva za resurs}
+\begin{usecase}
+        \addtitle{SLUČAJ UPOTREBE}{}
+        \addfield{Naziv:}{Prihvatanje zahteva za resurs}
+        \addfield{Kratak opis:}{Član zadruge prihvata zahtev za resurs i povezuje se sa drugim članom radi daljih pregovora}
+        \addfield{Učesnici:}{
+        Članovi zadruge
+        }
+        \addfield{Preduslovi:}{
+        Korisnik je registrovan i aktivni je član zadruge
+        }
+        \addfield{Postuslovi:}{
+        Sistem je povezao članove radi daljih pregovora oko traženog resursa
+        }
+
+        \addscenario{Glavni tok:}{
+            \item Korisnik pretražuje postojeće oglase
+            \item Korisnik izabira oglas za koji je zainteresovan 
+            \item Korisnik popunjava formu za oglas za koji je zainteresovan
+            \item Sistem vrši validaciju podataka
+            \item Sistem šalje podatke korisniku koji potražuje resurs
+            \item Korisnik prihvata postojeću ponudu
+            \item Sistem obaveštava korisnika o uspešnoj saradnji i omogućava dalju komunikaciju korisnika
+            
+        }
+        \addscenario{Alternativni tokovi:}{
+            \item[6.a] Ukoliko član zadruge ne prihvati ponudu korisnika sistem obaveštava korisnika o tome, i slušaj upotrebe se završava
+            
+            \item[6.b] Ukoliko član zadruge ne odgovori na ponudu u roku od 72 sata, sistem obaveštava korisnika o tome, oglas se privremeno uklanja i slušaj upotrebe se završava
+            
+        }
+        
+        \addfield{Dodatne informacije:}{
+        Forma koju korisnik popunjava zavisi od vrste resursa pa sadrži tip mašine, vreme proizvodnje, trajanje usloge ili vrstu skladišta, veličinu itd.
+        }
+\end{usecase}
+
+\subsubsection{Plaćanje proizvođaču}
+\begin{usecase}
+        \addtitle{SLUČAJ UPOTREBE}{}
+        \addfield{Naziv:}{Plaćanje proizvođaču}
+        \addfield{Kratak opis:}{Nakon što je roba isporučena i plaćena, korisniku su resursi plaćeni}
+        \addfield{Učesnici:}{
+            Kooperator, Član zadruge, Zaposleni zadruge
+        }
+        \addfield{Preduslovi:}{
+            Proizvodi su plaćeni, dostavljeni i stanje na računu je odgovarajuće
+           
+        }
+        \addfield{Postuslovi:}{
+           Proizvođaču je isplaćen novac za prodate proizvode
+        }
+
+        \addscenario{Glavni tok:}{
+            \item Zaposleni obaveštava sistem da su proizvodi uspešno dostavljeni
+            \item Sistem obaveštava korisnika o uspešnoj dostavi
+            \item Sistem uplaćuje sredstva na račun proizvođača uz uračunatu proviziju
+            \item Sistem ažurira stanje računa
+            \item Proizvođač je obavešten o uplati
+            \item Proizvođač potvrđuje da je uplata uspešno izvršena
+            
+        }
+        \addscenario{Alternativni tokovi:}{
+            \item[6.a] Prozivođač ne potvrđuje da je uplata uspešno izvršena, i ulaže žalbu koja se šalje direktoru. Slučaj upotrebe se završava 
+            
+            \item[6.a] Prozivođač ne potvrđuje da je uplata uspešno izvršena. Slučaj upotrebe se izvršava.
+            
+        }
+\end{usecase}
+
+
+
+\subsection{Kupovina}
 
 \subsubsection{Naručivanje proizvoda preko interneta}
 \begin{usecase}
