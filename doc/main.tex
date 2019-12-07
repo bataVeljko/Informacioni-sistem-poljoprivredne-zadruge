@@ -125,7 +125,6 @@ Detaljnom analizom načina funkcionisanja zadruga kako u poljoprivredi tako i u 
 
 \newpage
 
-\section{Slučajevi upotrebe}
 Na slici \ref{dtp_nivo_0} je prikazan dijagram konteksta kao i akteri, dok je na slici \ref{dtp_nivo_1} dat DTP dijagram nivoa 1.
 \begin{figure}[h!]
     \centering
@@ -141,23 +140,29 @@ Na slici \ref{dtp_nivo_0} je prikazan dijagram konteksta kao i akteri, dok je na
     \label{dtp_nivo_1}
 \end{figure}
 
+\newpage
+
+\section{Slučajevi upotrebe}
+
 \subsection{Nalozi}
-Na slici \ref{dtp_nalozi} je prikazan dijagram toka podataka, dok je na slici \ref{slika1} prikazan dijagram slucajeva upotrebe vezanih za vrste naloga u sistemu.
-\begin{figure}[h!]
-    \centering
-    \includegraphics[scale=0.6]{images/dtp_nalozi.png}
-    \caption{Dijagram toka podataka za naloge}
-    \label{dtp_nalozi}
-\end{figure}
+Na slici %\ref{dtp_nalozi} je prikazan dijagram toka podataka, dok je na slici 
+\ref{slika1} je prikazan dijagram slucajeva upotrebe vezanih za vrste naloga u sistemu.
+
+%\begin{figure}[h!]
+%    \centering
+%    \includegraphics[scale=0.6]{images/dtp_nalozi.png}
+%    \caption{Dijagram toka podataka za naloge}
+%    \label{dtp_nalozi}
+%\end{figure}
+
+%\clearpage
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[scale=0.5]{images/clanstvoSU.jpg}
+    \includegraphics{images/clanstvoSU.jpg}
     \caption{Dijagram slučajeva upotrebe vezanih za vrste naloga u sistemu}
     \label{slika1}
 \end{figure}
-
-\clearpage
 
 \subsubsection{Registrovanje korisnika}
 Na slici \ref{dakt_registr_korisnika} je prikazan dijagram aktivnosti za proces registracije novog korisnika.
@@ -260,22 +265,22 @@ Na slici \ref{dakt_apliciranje_clanstvo} je prikazan dijagram aktivnosti za proc
         }
 
         \addscenario{Glavni tok:}{
-            \item Korisnik odlazi na vebsajt i prijavljuje se
-            \item Korisnik popunjava podatke neophodne za apliciranje za članstvo u zadruzi
-            \item Korisnik šalje zahtev na obradu
+            \item Kooperant odlazi na vebsajt i prijavljuje se
+            \item Kooperant popunjava podatke neophodne za apliciranje za članstvo u zadruzi
+            \item Kooperant šalje zahtev na obradu
             \item Sistem vrši validaciju prijave
             \item Sistem prihvata zahtev za članstvo i prosleđuje ga članovima zadruge 
             \item Članovi zadruge imaju rok od 72h da izvrše glasanje za prihvatanje novog člana
-            \item Korisnik se obaveštava da je primljen u zadrugu
+            \item Sistem obaveštava kooperanta da je primljen u zadrugu
             \item Uloga trenutnog korisnika je promenjena u sistemu i on je sada ravnopravni član zadruge 
         }
         \addscenario{Alternativni tokovi:}{
-            \item[3.a] Korisnik odustaje od apliciranja za članstvo. Slučaj upotrebe se završava.
-            \item[4.a] Ukoliko korisnik nije uneo sve potrebne podatke i/ili podaci nisu u traženom formatu, prikazuje se odgovarajuća poruka. Slučaj upotrebe se nastavlja od koraka 2.
-            \item[7.a] Ukoliko korisnik nije primljen u zadrugu, ostaje kooperant i može se ponovo prijaviti za nedelju dana. Slučaj upotrebe se završava.
+            \item[3.a] Kooperant odustaje od apliciranja za članstvo. Slučaj upotrebe se završava.
+            \item[4.a] Ukoliko kooperant nije uneo sve potrebne podatke i/ili podaci nisu u traženom formatu, prikazuje se odgovarajuća poruka. Slučaj upotrebe se nastavlja od koraka 2.
+            \item[7.a] Ukoliko kooperant nije primljen u zadrugu, ostaje kooperant i može se ponovo prijaviti za nedelju dana. Slučaj upotrebe se završava.
         }
         \addfield{Dodatne informacije:}{
-            Informacije koje korisnik unosi u zahtevu za članstvo su: razlog za pristupanje zadruzi, vremenski period u ulozi kooperanta zadruge, proizvodi prodavani zadruzi, dodatni proizvodi koje bi mogao da prodaje, način doprinosa zadruzi.
+            Informacije koje kooperant unosi u zahtevu za članstvo su: razlog za pristupanje zadruzi, vremenski period u ulozi kooperanta zadruge, proizvodi prodavani zadruzi, dodatni proizvodi koje bi mogao da prodaje, način doprinosa zadruzi.
         }
 \end{usecase}
 
@@ -296,19 +301,19 @@ Na slici \ref{dakt_apliciranje_clanstvo} je prikazan dijagram aktivnosti za proc
         }
 
         \addscenario{Glavni tok:}{
-            \item Korisnik odlazi na vebsajt i prijavljuje se
-            \item Korisnik odabira opciju napuštanja zadruge 
-            \item Korisnik unosi razlog za napuštanje zadruge 
-            \item Korisnik odabira brisanje naloga kao novu ulogu unutar sistema
-            \item Korisnik šalje popunjeni zahtev 
+            \item Član zadruge odlazi na vebsajt i prijavljuje se
+            \item Član zadruge odabira opciju napuštanja zadruge 
+            \item Član zadruge unosi razlog za napuštanje zadruge 
+            \item Član zadruge odabira brisanje naloga kao novu ulogu unutar sistema
+            \item Član zadruge šalje popunjeni zahtev 
             \item Sistem obrađuje zahtev 
             \item Menja se uloga korisnika u bazi podataka
             \item Korisnik dobija poruku o uspešnom napuštanju zadruge
         }
         \addscenario{Alternativni tokovi:}{
-            \item[4.a] Ukoliko je korisnik izabrao da postane kooperant, sistem obrađuje zahtev i obaveštava zadrugara da od sada ima ulogu kooperanta. Slučaj upotrebe se završava.
-            \item[4.b] Ukoliko je korisnik izabrao da postane kupac, sistem obrađuje zahtev i obaveštava korisnika da od sada ima ulogu kupca. Slučaj upotrebe se završava.
-            \item[5.a] Ukoliko je korisnik ipak rešio da ostane član (napuštanjem forme ili poništavanjem unetih podataka), slučaj upotrebe se završava.
+            \item[4.a] Član zadruge je izabrao da postane kooperant, sistem obrađuje zahtev i obaveštava korisnika da od sada ima ulogu kooperanta. Slučaj upotrebe se završava.
+            \item[4.b] Član zadruge je izabrao da postane kupac, sistem obrađuje zahtev i obaveštava korisnika da od sada ima ulogu kupca. Slučaj upotrebe se završava.
+            \item[5.a] Član zadruge je ipak rešio da ostane član (napuštanjem forme ili poništavanjem unetih podataka), slučaj upotrebe se završava.
     
         }
 \end{usecase}
@@ -344,11 +349,11 @@ Na slici \ref{dsekv_izbacivanje_iz_zadruge} je prikazan dijagram sekvence izbaci
             \item Direktor unosi razlog ga izbacivanje člana iz zadruge, odnosno bira koje je pravilo prekršio član zadruge
             \item Direktor potvrđuje unesene podatke
             \item Sistem obrađuje zahtev
-            \item Član zadruge je izbrisan iz sistema
-            \item Korisnik dobija automatsku poruku na email adresu koja sadrži razlog izbacivanja i obaveštenje da je njegov nalog izbrisan
+            \item Sistem briše člana zadruge
+            \item Sistem šalje poruku korisniku na email adresu koja sadrži razlog izbacivanja i obaveštenje da je njegov nalog izbrisan
         }
         \addscenario{Alternativni tokovi:}{
-            \item[4.a] Ukoliko je direktor ipak rešio da ne izbaci člana iz zadruge (napuštanjem forme ili poništavanjem unetih podataka), slučaj upotrebe se završava.
+            \item[4.a] Direktor je rešio da ne izbaci člana iz zadruge (napuštanjem forme ili poništavanjem unetih podataka), slučaj upotrebe se završava.
         }
 \end{usecase}
 
@@ -420,14 +425,15 @@ Na slici \ref{dsekv_izbacivanje_iz_zadruge} je prikazan dijagram sekvence izbaci
 
 \subsection{Proizvodnja i prodaja}
 
-Na slici \ref{dtp_proizvodnja_prodaja} je prikazan dijagram toka podataka za slučaj upotrebe proizvodnja i prodaja, dok je na slici \ref{dslucup_proizvodnja_prodaja} prikazan dijagram slučaja upotrebe.
+Na slici %\ref{dtp_proizvodnja_prodaja} je prikazan dijagram toka podataka za slučaj upotrebe proizvodnja i prodaja, dok je na slici 
+\ref{dslucup_proizvodnja_prodaja} je prikazan dijagram slučajeva upotrebe proizvodnja i prodaja.
 
-\begin{figure}[h!]
-    \centering
-    \includegraphics[scale=0.64]{images/dtp_proizvodnja_prodaja.png}
-    \caption{Dijagram toka podataka za slučaj upotrebe proizvodnja i prodaja}
-    \label{dtp_proizvodnja_prodaja}
-\end{figure}
+%\begin{figure}[h!]
+%    \centering
+%    \includegraphics[scale=0.64]{images/dtp_proizvodnja_prodaja.png}
+%    \caption{Dijagram toka podataka za slučaj upotrebe proizvodnja i prodaja}
+%    \label{dtp_proizvodnja_prodaja}
+%\end{figure}
 
 \begin{figure}[h!]
     \centering
@@ -615,13 +621,14 @@ Na slici \ref{dsekv_placanje_proizvodjacu} je prikazan dijagram sekvence plaćan
 
 \subsection{Kupovina}
 
-Na slici \ref{dtp_kupovina} je prikazan dijagram toka podataka za slučaj kupovina, dok je na slici \ref{dslucup_kupovina} prikazan dijagram slučaja upotrebe.
-\begin{figure}[h!]
-    \centering
-    \includegraphics[scale=0.64]{images/dtp_kupovina.png}
-    \caption{Dijagram toka podataka za slučaj upotrebe kupovina}
-    \label{dtp_kupovina}
-\end{figure}
+Na slici %\ref{dtp_kupovina} je prikazan dijagram toka podataka za slučaj kupovina, dok je na slici 
+\ref{dslucup_kupovina} je prikazan dijagram slučajeva upotrebe kupovina.
+%\begin{figure}[h!]
+%    \centering
+%    \includegraphics[scale=0.64]{images/dtp_kupovina.png}
+%    \caption{Dijagram toka podataka za slučaj upotrebe kupovina}
+%    \label{dtp_kupovina}
+%\end{figure}
 
 \begin{figure}[h!]
     \centering
@@ -629,7 +636,6 @@ Na slici \ref{dtp_kupovina} je prikazan dijagram toka podataka za slučaj kupovi
     \caption{Dijagram slučaja upotrebe vezanog za kupovinu}
     \label{dslucup_kupovina}
 \end{figure}
-
 
 \clearpage
 
@@ -763,13 +769,15 @@ Na slici \ref{dsekv_obrada_dostava} je prikazan dijagram sekvence obrade i dosta
 
 
 \subsection{Ostalo}
-Na slici \ref{dtp_ostalo} je prikazan dijagram toka podataka za slučaj ostalo, , dok je na slici \ref{dslucup_ostalo} prikazan dijagram slučaja upotrebe.
-\begin{figure}[h!]
-    \centering
-    \includegraphics[scale=0.64]{images/dtp_ostalo.png}
-    \caption{Dijagram toka podataka za slučaj ostalo}
-    \label{dtp_ostalo}
-\end{figure}
+Na slici %\ref{dtp_ostalo} je prikazan dijagram toka podataka za slučaj ostalo, , dok je na slici 
+\ref{dslucup_ostalo} je prikazan dijagram slučajeva upotrebe ostalo.
+
+%\begin{figure}[h!]
+%    \centering
+%    \includegraphics[scale=0.64]{images/dtp_ostalo.png}
+%    \caption{Dijagram toka podataka za slučaj ostalo}
+%    \label{dtp_ostalo}
+%\end{figure}
 
 \begin{figure}[h!]
     \centering
@@ -779,7 +787,6 @@ Na slici \ref{dtp_ostalo} je prikazan dijagram toka podataka za slučaj ostalo, 
 \end{figure}
 
 \clearpage
-
 
 \subsubsection{Davanje novčanog priloga}
 \begin{usecase}
