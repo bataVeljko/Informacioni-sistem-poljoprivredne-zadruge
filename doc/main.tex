@@ -927,9 +927,60 @@ Na slici \ref{bpmn_mesecna_clanarina} je prikazan BPMN dijagram plaćanja člana
         \addfield{Dodatne informacije:}{Forma za stvaranje izveštaja sadrži sledeća polja: datum od kojeg se traže prihodi i rashodi, format dokumenta (pdf/docx/csv), korisnici kojima se šalje izveštaj (direktor/članovi zadruge)}
 \end{usecase}
 
-\section{Arhitektura sistema}
+\section{Predlog arhitekture sistema}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.335]{images/Predlog_arhitekture.jpg}
+    \caption{Predlog arhitekture sistema}
+    \label{predlog_arhitekture_sistema}
+\end{figure}
+
+\subsection{Karakteristike}
+
+\begin{enumerate}
+    \item Tip aplikacije: veb aplikacija
+    \item Strategija isporučivanja: jedan serverski i više klijentskih računara
+    \item Odgovarajuće tehnologije: Java, MySQL, JavaFX, JS, HTML5, CSS3
+\end{enumerate}
+
+\indent Ovako organizovan sistem je jednostavan za održavanje, skalabilan je tj jednostavno se povećava broj klijenata, veb aplikacija omogućava visok stepen ažurnosti. Ukoliko bude potrebe mogu se uzeti dodatni serveri, čime bi se povećala fleksibilnost i pouzdanost sistema. Logika aplikacije se može menjati i u toku rada.
+
+\subsection{Slojevi arhitekture}
+
+\indent Veb aplikaciju predstavlja višeslojna klijent-server arhitektura, koja je prikazana na slici \ref{predlog_arhitekture_sistema}. Arhitekturu čine prezentacioni sloj, klijent kontroler, server kontroler i sloj podataka.
+
+\subsubsection{Prezentacioni sloj}
+Glavni zadatak prezentacionog sloja je da omogući korisniku komunikaciju sa sistemom, tako da ona bude što efikasnija i jednostavnija. Pruža sledeće mogućnosti:
+\begin{itemize}
+    \item Registracija
+    \item Prijavljivanje
+    \item Kupovina
+    \item Potražnja resursa
+    \item Plaćanje članarine
+\end{itemize}
+
+\subsubsection{Klijent kontroler}
+Omogućava komunikaciju sa serverskim slojem sistema. Takođe, izvršava validaciju podataka kao i njihovu autorizaciju i autentifikaciju. Pruža sledeće mogućnosti:
+\begin{itemize}
+    \item Validacija
+    \item Autorizacija / autentifikacija
+\end{itemize}
+
+\subsubsection{Server kontroler}
+Ima sličnu ulogu kao klijent kontroler, s tim da klijent ne može pristupiti ovom sloju, pa se na njemu vrše dodatne provere podataka. Predstavlja posrednika u komunikaciji sa slojem podataka. Pruža sledeće mogućnosti:
+\begin{itemize}
+    \item Upravljanje korisnicima
+    \item Upravljanje porudžbinama
+    \item Upravljanje resursima
+    \item Verifikacija
+\end{itemize}
+
+\subsubsection{Sloj podataka}
+Sadrži bazu podataka i omogućuje bezbedan i lak pristup podacima. Shema baze podataka biće predstavljena u narednom delu. % \ref{baza_podataka}.
 
 \section{Baza podataka}
+\label{baza_podataka}
 
 \section{Korisnički interfejs}
 
