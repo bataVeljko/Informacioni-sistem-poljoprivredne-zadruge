@@ -463,7 +463,7 @@ Na slici \ref{dakt_slanje_ponude_za_prodaju} je prikazan dijagram aktivnosti za 
         Član zadruge, kooperant, zaposleni zadruge
         }
         \addfield{Preduslovi:}{
-        Korisnik je registrovan
+        Korisnik je registrovan i ima ulogu člana zadruge ili kooperanta
         }
         \addfield{Postuslovi:}{
         Proizvodi su prikazani potencijalnim kupcima kao deo ponude zadruge
@@ -611,10 +611,7 @@ Na slici \ref{dsekv_placanje_proizvodjacu} je prikazan dijagram sekvence plaćan
             
         }
         \addscenario{Alternativni tokovi:}{
-            \item[6.a] Prozivođač ne potvrđuje da je uplata uspešno izvršena, i ulaže žalbu koja se šalje direktoru. Slučaj upotrebe se završava 
-            
-            \item[6.a] Prozivođač ne potvrđuje da je uplata uspešno izvršena. Slučaj upotrebe se izvršava.
-            
+            \item[6.a] Prozivođač ne potvrđuje da je uplata uspešno izvršena,  ulaže žalbu koja se šalje direktoru. Slučaj upotrebe se završava 
         }
 \end{usecase}
 
@@ -977,13 +974,52 @@ Ima sličnu ulogu kao klijent kontroler, s tim da klijent ne može pristupiti ov
 \end{itemize}
 
 \subsubsection{Sloj podataka}
-Sadrži bazu podataka i omogućuje bezbedan i lak pristup podacima. Shema baze podataka biće predstavljena u narednom delu. % \ref{baza_podataka}.
+Sadrži bazu podataka i omogućuje bezbedan i lak pristup podacima. Shema baze podataka biće predstavljena u narednom delu \ref{baza_podataka}.
 
 \section{Baza podataka}
 \label{baza_podataka}
 
-\section{Korisnički interfejs}
+U ovom delu biće data shema predložene baze podataka sistema kao i opis entiteta koji se nalaze unutar sheme.
 
+\subsubsection{Pregled entiteta}
+Na slici \ref{predlog_baze_sistema} nalazi se shema predložene baze podataka. 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.42]{images/baza.png}
+    \caption{Shema baze podataka sistema}
+    \label{predlog_baze_sistema}
+\end{figure}
+
+\subsubsection{Nezavisni entiteti}
+Nezavisni entiteti u bazi podataka su
+\begin{itemize}
+    \item Korisnik
+    \item Platna kartica
+    \item Prijava
+    \item Članarina
+    \item Porudžbina
+    \item Dostava
+    \item Proizvod
+    \item Donacija
+    \item Rashod
+    \item Potražnja
+    \item Uplata
+\end{itemize}
+\subsubsection{Zavisni entiteti}
+\begin{itemize}
+    \item Osoba
+\end{itemize}
+\subsubsection{Agregirani entiteti}
+\begin{itemize}
+    \item Proizvod\_Prodaja
+    \item Proizvod\_Uplata
+    \item Porudžbina\_Proizvod
+    \item Korisnik\_Potražnja
+    \item Korisnik\_Ponuda
+\end{itemize}
+
+\section{Korisnički interfejs}
+\label{korisnicki_interfejs}
 
 
 
