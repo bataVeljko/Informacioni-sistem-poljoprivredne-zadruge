@@ -1,5 +1,5 @@
 % !TEX encoding = UTF-8 Unicode
-\documentclass[a4paper]{article}
+\documentclass[a4paper, oneside]{article}
 \usepackage{titling}
 \usepackage{makecell}
 \usepackage{color}
@@ -10,6 +10,10 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english,serbian]{babel}
 \usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{sectsty}
+\paragraphfont{\fontsize{14}{15}\selectfont}
+\pagestyle{fancy}
 
 \graphicspath{{./images/}}
 
@@ -17,16 +21,30 @@
 
 \pagenumbering{gobble}
 
-\title{Informacioni sistem poljoprivredne zadruge \small{Seminarski rad u okviru kursa\\Informacioni sistemi\\ Matematički fakultet}}
+\title{\normalsize{Seminarski rad u okviru kursa\\Informacioni sistemi\\ Matematički fakultet\\}\vspace{1cm} \huge Informacioni sistem poljoprivredne zadruge\\ }
 
-\author{Gajić Zorana, zorana.gajic.zg@gmail.com, 1091/2019 \\ 
-        Dimić Nikola, dimic.nikola@gmail.com, 1098/2019 \\
-        Jakovljević Aleksandar, a.jakovljevic96@gmail.com, 1090/2019 \\ 
-        Veljković Marko, marko.veljko@gmail.com, 1096/2019}
+\vspace{1cm}
 
-\date{Novembar 2019}
+\author{\large Gajić Zorana, zorana.gajic.zg@gmail.com, 
+        1091/2019 \\ 
+        \large Dimić Nikola, dimic.nikola@gmail.com, 
+        1098/2019 \\
+        \large Jakovljević Aleksandar, a.jakovljevic96@gmail.com, 
+        1090/2019 \\ 
+        \large Veljković Marko, marko.veljko@gmail.com, 
+        1096/2019 \\}
+
+\date{}
 
 \maketitle
+
+\vspace{\fill}
+
+\large{
+Profesor: \\ dr Saša Malkov \\
+
+Asistent: \\ Ognjen Kocić \hfill Beograd, Decembar 2019.
+}
 
 \newpage
 
@@ -1005,10 +1023,108 @@ Nezavisni entiteti u bazi podataka su
     \item Potražnja
     \item Uplata
 \end{itemize}
+\paragraph{Korisnik} Entiet predstavlja sve učesnike koji imaju registrovane naloge sa jedinstvenim korisničkim imenom i automatski generisanom identifikacionom oznakom. Brisanje profila se vrši promenom statusa korisnika u deaktiviran. Na ovaj način se omogućava korisniku da povrati sopstvene informacije ukoliko želi da se registruje ponovo. 
+\begin{itemize}
+    \item \textbf{id\_korisnika} 
+    \item \textbf{koriscniko\_ime} jedinstveno korisničko ime
+    \item \textbf{uloga} 
+    \item \textbf{status}
+    \item \textbf{sifra} heširana lozinka
+\end{itemize}
+\paragraph{Platna kartica} Sadrži informacije o platnim karticama korisnika koje su dobijene eksplicitnom dozvolom korisnika. Korisnik može da odjavi karticu i da na taj način promeni njen status koji je inače aktivan. 
+\begin{itemize}
+    \item \textbf{broj\_kartice} 
+    \item \textbf{tip} debitna ili kreditna
+    \item \textbf{status} 
+    \item \textbf{id\_korisnika}
+\end{itemize}
+\paragraph{Prijava} Sadrži informacije o prijavama korisnika za članstvo u zadruzi. Korisnici koji mogu da se prijave imaju ulogu kooperanta. Početak i kraj perioda predstavljaju vremenski interval u kom ostali korisnici glasaju da li prihvataju novog člana. 
+\begin{description}
+    \item[id\_prijave]
+    \item[status]
+    \item[razlog] razlog zbog kojeg se korisnik prijavljuje za članstvo
+    \item[pocetak\_perioda]
+    \item[kraj\_perioda]
+    \item[doprinos] potencijalni doprinos korisnika koji se prijavljuje
+    \item[id\_korisnika]
+\end{description}
+\paragraph{Članarina} Sadrži informacije o uplatama članarine članova. Svaki član zadruge plaća članarinu i čuvaju se informacije o vrednosti i datumu uplate. Entitet, odnosno red, je određen automatski generisanim identifikacioni broj. Sadrži i strani ključ ka relaciji Korisnik.
+\begin{description}
+    \item[id\_clanarine]
+    \item[datum\_uplate]
+    \item[vrednost] 
+    \item[id\_korisnika]
+\end{description}
+\paragraph{Porudžbina} Sadrži informacije o porudžbinama koje nastaju prilikom kupovine proizvoda. Čuvaju se vreme porudžbine, količina koja je poručena i na koji način se vrši dostavljanje i plaćanje. Pored informacija, sadrži i dva strana ključa ka relacijama Proizvod i Korisnik.
+\begin{description}
+    \item[id\_porudzbine]
+    \item[vreme\_porudzbine]
+    \item[kolicina]
+    \item[nacin\_dostave]
+    \item[nacin\_placanja]
+    \item[id\_proizvoda]
+    \item[id\_korisnika]
+\end{description}
+\paragraph{Dostava} Sadrži informacije o dostavi porudžbine. Status dostave se menja u zavisnosti od u kom procesu se nalazi dostava, dok je rok datum unapred zadat. Sadrži strani ključ ka relaciji Porudžbine.
+\begin{description}
+    \item[id\_dostave]
+    \item[status]
+    \item[rok] unapred zadat datum
+    \item[id\_porudzbine]
+\end{description}
+\paragraph{Proizvod} Sadrži informacije o svim proizvodima koji su se ikad našli u zadruzi. Identifikujuća kolona sadrži automatske generisane vrednosti, kao i naziv proizvoda i opis proizvoda.
+\begin{description}
+    \item[id\_proizvoda]
+    \item[naziv] 
+    \item[opis] kratak opis specifičnih osobina proizvoda
+\end{description}
+\paragraph{Donacija} Sadrži informacije o donacijama korisnika. Pored identifikujuće kolone, čuva se datum donacije, vrednost donacije, svrha i strani ključ ka relaciji Korisnik ka korisniku koji je izvršio donaciju.
+\begin{description}
+    \item[id\_donacije]
+    \item[datum\_donacije]
+    \item[vrednost]
+    \item[svrha] kratak opis čemu je donacija posvećena
+    \item[id\_korisnika]
+\end{description}
+\paragraph{Rashod} Sadrži informacije o rashodima zadruge koje je dozvolio blagajnik, a zahtevao direktor. Potrebno je navesti vrednost rashoda, kratak razlog, kao i detaljno obrazloženje. Status rashoda govori o tome da li je rashod odobren ili ne, odnosno podignut ukoliko je prethodno bio odobren.
+\begin{description}
+    \item[id\_rashoda]
+    \item[vrednost]
+    \item[razlog] kratak opis rashoda
+    \item[detaljan\_razlog] detaljan opis rashoda, dostupan blagajniku i eksplicitno dostupan korisnicima
+    \item[status] 
+\end{description}
+\paragraph{Potražnja} Sadrži informacije o potražnjama članove zadruge. Svaki red je određen automatski generisanim ključem. Član potražuje određeni tip za konkretan period i lokaciju za koju se vrši potražnja, kao i dodatan opis potražnje.
+\begin{description}
+    \item[id\_potraznje]
+    \item[tip] 
+    \item[pocetak\_perioda]
+    \item[kraj\_perioda]
+    \item[lokacija]
+    \item[opis]
+\end{description}
+\paragraph{Uplata} Sadrži informacije o svim uplatama koje je su izvršene. Status sadrži informaciju u tome da li je uplata uspešna ili neuspešna. Osim statusa, čuva se i datum uplate.
+\begin{description}
+    \item[id\_uplate]
+    \item[status]
+    \item[datum\_uplate]
+\end{description}
+
 \subsubsection{Zavisni entiteti}
 \begin{itemize}
     \item Osoba
 \end{itemize}
+\paragraph{Osoba}
+Sadrži dodatne informacije o korisniku. Pored imena, prezimena, datuma rođenja i jmbg korisnika, sadrži informacije o broju telefona i e-mail adresi korisnika. Ukoliko korisnik želi da obriše svoj nalog, e-mail adresa se postavlja na null. Sadrži i strani ključ ka korisniku, koji je ujedno i primarni ključ, što čini entitet zavisnim. E-mail adresa i jmbg su jedinstveni.
+\begin{description}
+    \item[id\_korisnika] 
+    \item[ime]
+    \item[prezime]
+    \item[datum\_rodjenja]
+    \item[jmbg]
+    \item[email]
+    \item[broj\_telefona]
+\end{description}
 \subsubsection{Agregirani entiteti}
 \begin{itemize}
     \item Proizvod\_Prodaja
@@ -1018,6 +1134,39 @@ Nezavisni entiteti u bazi podataka su
     \item Korisnik\_Ponuda
 \end{itemize}
 
+\paragraph{Proizvod\_Prodaja}
+Sadrži informacije o prodajama, gde svakoj prodaji odgovara jedan proizvod i jedan korisnik koji je prozivođač proizvoda i kojima odgovaraju strani ključevi ka Proizvodu i Korisniku. Pored stranih ključeva koji zajedno čine složeni primarni ključ, od atributa se javljaju mesto proizvodnje, kao lokacija na kojoj se proizvod proizveo, zatim količina proizvoda, kao koliko proizvoda se prodaje u ovoj prodaji, kao i cena jednog proizvoda i informacija o tome da li se prozivod još uvek proizvodi ili ne koja se čuva u koloni status proizvodnje.
+\begin{description}
+    \item[id\_proizvoda]
+    \item[id\_korisnika]
+    \item[mesto\_proizvodnje]
+    \item[kolicina\_proizvoda]
+    \item[cena\_proizvodnje]
+    \item[status\_proizvodnje]
+\end{description}
+\paragraph{Proizvod\_Uplata} Sadrži informacije o svim uplatama koje je korisnik uplatio radi kupovine nekog proizvoda. Sadrži strane ključeve ka Proizvodu, Uplati i Korisniku i strani ključevi ka Proizvodu i Uplati čine složeni primarni ključ tabele. Jedan prozivod može imati više uplata jednog korisnika i jedan korisnik može imati više uplata.
+\begin{description}
+    \item[id\_proizvoda]
+    \item[id\_uplate]
+    \item[id\_korisnika]
+\end{description}
+\paragraph{Porudžbina\_Proizvod} Sadrži informacije o porudžbinama i proizvodima. Sadrži dva strana ključa, po jedan ka Porudžbini i Proizvodu. Strani ključevi zajedno čine složeni primarni ključ. Jedna porudžbina može imati više proizvoda i jedan proizvod se može naći na više porudžbina.
+\begin{description}
+    \item[id\_porudzbine]
+    \item[id\_proizvoda]
+\end{description}
+\paragraph{Korisnik\_Potražnja} Sadrži informacije o korisniku i potražnji korisnika. Sadrži dva strana ključa, po jedan ka Korisniku i Potražnji i kolonu status koja opisuje u kom statusu se nalazi potražnja, odnosno da li je završena, postavljena ili prihvaćena. 
+\begin{description}
+    \item[id\_korisnika]
+    \item[id\_potraznje]
+    \item[status]
+\end{description}
+\paragraph{Korisnik\_Ponuda} Sadrži informacije o korisniku i ponudi na konkretnu potražnju. Kolona opis predstavlja opisnu ponudu korisnika. Sadrži dva strana ključa, po jedan ka Korisniku i Korisnik\_Potražnja, gde pomenuta dva strana ključa čine složeni primarni ključ. Jedan korisnik može imati više ponuda i jednoj potražnji odgovara više ponuda.  
+\begin{description}
+    \item[id\_korisnika]
+    \item[id\_potraznja]
+    \item[opis]
+\end{description}
 \section{Korisnički interfejs}
 \label{korisnicki_interfejs}
 
@@ -1091,5 +1240,15 @@ Nezavisni entiteti u bazi podataka su
     \caption{Moj profil - potražnja}
     \label{profile3}
 \end{figure}
+
+\clearpage
+
+\section{Zaključak}
+\indent Digitalizacija u današnjem vremenu nije zaobišla ni poljoprivredne zadruge, pa smo u ovom radu prikazali kako bi mogao da izgleda informacioni sistem jedne od njih. \\
+\indent Tokom rada je izvršena analiza i određeni su akteri u sistemu. Modelovani su svi slučajevi upotrebe, dok su najznačajniji prikazani UML dijagramima. Nakon toga je predložena arhitektura sistema i napravljena shema baze podataka. Na kraju je dat prikaz predloga grafičkog korisničkog interfejsa i kreiran prototip koji oslikava mogućnosti sistema. \\ 
+\indent Dalji rad na projektu podrazumeva pronalaženje klijenta, dorada sistema u dogovoru sa njim i konkretnu implementaciju.
+
+\section{Literatura}
+---TODO---
     
 \end{document}
